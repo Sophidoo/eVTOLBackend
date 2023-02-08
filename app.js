@@ -3,6 +3,7 @@ import { dbConnect } from "./config/dbConnect.js";
 import dotenv from "dotenv";
 import userRoutes from "./routes/UserRoutes.js";
 import cors from "cors";
+import medicationRoutes from "./routes/MedicationRoute.js";
 
 dotenv.config();
 dbConnect();
@@ -25,6 +26,8 @@ app.use((req, res, next) => {
 app.use(express.json());
 
 app.use("/api/v1/users", userRoutes);
+
+app.use("api/v1/medications", medicationRoutes)
 
 
 const PORT = process.env.PORT || 3000
