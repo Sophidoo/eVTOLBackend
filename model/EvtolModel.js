@@ -11,7 +11,7 @@ const evtolSchema = new mongoose.Schema({
         required: [true, "Please choose a model for the evtol"]
     },
     weight: {
-        type: Float32Array,
+        type: mongoose.Schema.Types.Decimal128,
         required: [true, "Please enter the weight limit"]
     },
     batteryCapacity: {
@@ -20,11 +20,12 @@ const evtolSchema = new mongoose.Schema({
     },
     state: {
         type: String,
-        enum: ["Idle", "Loading", "Loaded", "Delivering", "Delivered", "Returning"]
+        enum: ["IDLE", "LOADING", "LOADED", "DELIVERING", "DELIVERED", "RETURNING"],
+        default: "IDLE"
     },
     user: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "User"
+        ref: "EvtolUser"
     }
 })
 

@@ -26,11 +26,12 @@ const medicationSchema = new mongoose.Schema({
     },
     user: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "User"
+        ref: "EvtolUser"
+        
     }
 
 })
 
-const Medication = mongoose.model("Mediccation", medicationSchema)
+const Medication = mongoose.model("Medication", medicationSchema)
 
 export default Medication

@@ -1,6 +1,7 @@
 import { getSpecificUserController, updatePasswordController, updateUserController, userLoginController, userRegisterationController } from "../controller/UserController.js"
 import { isLogin } from "../middleware/isLogin.js";
 import express from "express";
+import { adminLoginController, adminRegisteration, changeEmail, changePassword } from "../controller/AdminController.js";
 
 const userRoutes = express.Router()
 
@@ -19,4 +20,15 @@ userRoutes.put("/update", isLogin, updateUserController)
 // update password
 userRoutes.put("/updatepassword", isLogin, updatePasswordController)
 
+// register an admin
+userRoutes.post("/admin", adminRegisteration);
+
+// admin login
+userRoutes.post("/adminlogin", adminLoginController);
+
+// change admin password
+userRoutes.put("/adminpassword", changePassword)
+
+// change admin email
+userRoutes.put("/adminemail", changeEmail)
 export default userRoutes;

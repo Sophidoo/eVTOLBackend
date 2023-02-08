@@ -2,7 +2,7 @@ import Medication from "../model/MedicationModel.js";
 
 
 export const addMedicationController = async(req, res) => {
-    const{medicationName, medicationCode, medicationPicture, weight, quantity, evtol, user} = req.body;
+    const{medicationName, medicationCode, medicationPicture, weight, quantity, evtol} = req.body;
 
     try{
         const medications = await Medication.find();

@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import userRoutes from "./routes/UserRoutes.js";
 import cors from "cors";
 import medicationRoutes from "./routes/MedicationRoute.js";
+import evtolRoutes from "./routes/EvtolRoutes.js";
 
 dotenv.config();
 dbConnect();
@@ -27,7 +28,9 @@ app.use(express.json());
 
 app.use("/api/v1/users", userRoutes);
 
-app.use("api/v1/medications", medicationRoutes)
+app.use("api/v1/medications", medicationRoutes);
+
+app.use("api/v1/evtol", evtolRoutes)
 
 
 const PORT = process.env.PORT || 3000

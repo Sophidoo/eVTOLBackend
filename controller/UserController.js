@@ -1,4 +1,4 @@
-import User from "../model/UserModel.js";
+import EvtolUser from "../model/UserModel.js";
 import bcrypt from "bcrypt";
 import generateToken from "../util/generateToken.js";
 
@@ -7,7 +7,7 @@ export const userRegisterationController = async(req, res) => {
     const{firstname, lastname, email, password} = req.body;
 
     try{
-        const findUser = await User.findOne({email})
+        const findUser = await EvtolUser.findOne({email})
 
         if(findUser){
             return res.json({
@@ -19,7 +19,7 @@ export const userRegisterationController = async(req, res) => {
         const salt = await bcrypt.genSalt(5);
         const hashedPassword = await bcrypt.hash(password, salt)
 
-        const user = await User.create({
+        const user = await EvtolUser.create({
             firstname,
             lastname,
             email,
@@ -44,7 +44,7 @@ export const userLoginController = async(req, res) => {
     const {email, password} = req.body;
 
     try{
-        const findUser = await User.findOne({email})
+        const findUser = await EvtolUser.findOne({email})
 
         if(!findUser){
             res.json({
@@ -80,7 +80,7 @@ export const userLoginController = async(req, res) => {
 export const getSpecificUserController = async(req, res) => {
 
     try{
-        const findUser = await User.findById(req.userAuth);
+        const findUser = await EvtolUser.findById(req.userAuth);
 
 
         if(!findUser){
@@ -109,7 +109,7 @@ export const updateUserController = async(req, res) => {
     const{firstname, lastname, email} = req.body;
 
     try{
-        await User.updateOne(req.userAuth, {
+        await EvtolUser.updateOne(req.userAuth, {
             $set: {
                 firstname: firstname,
                 lastname: lastname,
@@ -139,7 +139,7 @@ export const updatePasswordController = async(req, res) => {
     const {password} = req.body;
 
     try{
-        await User.updateOne(req.userAuth, {
+        await EvtolUser.updateOne(req.userAuth, {
             $set: {
                 password: password
             }
