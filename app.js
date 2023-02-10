@@ -28,9 +28,9 @@ app.use(express.json());
 
 app.use("/api/v1/users", userRoutes);
 
-app.use("api/v1/medications", medicationRoutes);
+app.use("/api/v1/medications", medicationRoutes);
 
-app.use("api/v1/evtol", evtolRoutes)
+app.use("/api/v1/evtol", evtolRoutes)
 
 
 const PORT = process.env.PORT || 3000

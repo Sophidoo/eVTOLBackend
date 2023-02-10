@@ -3,19 +3,31 @@ import Admin from "../model/AdminModel.js";
 
 // register an admin
 export const adminRegisteration = async(req, res) => {
-    const{email, password} = req.body;
+    const{username, password} = req.body;
 
     try{
+        const findUser = await Admin.findOne({username});
+
+        
+        if(findUser){
+            console.log(findUser)
+            return res.json({
+                status: "error",
+                message: "Account Already Exists, Please login"
+            })
+        }
+
         const salt = await bcrypt.genSalt(5);
         const hashedPassword = await bcrypt.hash(password, salt) 
-        await Admin.create({
-            email,
+        const admin = await Admin.create({
+            username,
             password: hashedPassword
         })
 
         res.json({
             status: "success",
-            message: "Admin account created successfully"
+            data: admin
+            // message: "Admin account created successfully"
         })
     }catch(error){
         res.json({
@@ -27,10 +39,10 @@ export const adminRegisteration = async(req, res) => {
 
 // admin login controller
 export const adminLoginController = async(req, res) => {
-    const {email, password} = req.body;
+    const {username, password} = req.body;
 
     try{
-        const findUser = Admin.findOne({email});
+        const findUser = await Admin.findOne({username});
 
         if(!findUser){
             res.json({
@@ -48,7 +60,7 @@ export const adminLoginController = async(req, res) => {
         }else{
             res.json({
                 status: "success",
-                message: "Login Successfull"
+                data: findUser
             })
         }
 
@@ -65,18 +77,24 @@ export const adminLoginController = async(req, res) => {
 // change admin password
 export const changePassword = async(req, res) => {
     const {password} = req.body;
+    const {username}= req.params;
 
     const salt = await bcrypt.genSalt(5);
     const hashedPassword = await bcrypt.hash(password, salt)
 
+    const admin = await Admin.findOne({username})
+    
+
     try{
-        await Admin.findByIdAndUpdate(req.params.email, {
+        await Admin.updateOne(admin, {
             $set: {
                 password: hashedPassword
             }
         },{
             new: true
         })
+
+        admin.save()
 
         res.json({
             status: "success",
@@ -90,26 +108,3 @@ export const changePassword = async(req, res) => {
     }
 }
 
-// change admin email
-export const changeEmail = async(req, res) => {
-    const {email} = req.body;
-    try{
-        await Admin.findByIdAndUpdate(req.params.email, {
-            $set: {
-                email: email
-            }
-        },{
-            new: true
-        })
-
-        res.json({
-            status: "success",
-            message: "Email updated successfully"
-        })
-    }catch(error){
-        res.json({
-            status: "error",
-            message: error.message
-        })
-    }
-}

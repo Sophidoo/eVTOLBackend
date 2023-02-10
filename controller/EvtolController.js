@@ -7,7 +7,7 @@ export const evtolRegisterationController = async(req, res) => {
 
     const findEvtol = await Evtol.findOne({serialno})
 
-    if(!findEvtol){
+    if(findEvtol){
         return res.json({
             status: "error",
             message: "Evtol with that serial number already exists"
@@ -83,10 +83,40 @@ export const evtolEditController = async(req, res) => {
 
 }
 
+// change state of evtol
+export const changeStateController = async(req, res) => {
+    const{state} = req.body;
+
+    try{
+        await Evtol.findByIdAndUpdate(req.params.id, {
+            $set: {
+                state: state
+            }
+        },
+        {
+            new: true
+        })
+
+        res.json({
+            status: "success",
+            message: "Evtol edited successfully"
+        })
+    }catch(error){
+        res.json({
+            status: "error",
+            message: error.message
+        })
+    }
+
+}
+
 // delete evtol
 export const evtolDeleteController = async(req, res) => {
+    const {serialno} = req.params;
+    console.log(serialno)
     try{
-        const evtol = await Evtol.findOne(req.params.serial)
+        const evtol = await Evtol.findOne({serialno})
+        console.log(evtol)
 
         if(!evtol){
             return res.json({
@@ -115,7 +145,7 @@ export const clearUserFromEvtol = async(req, res) => {
     try{
         await Evtol.findByIdAndUpdate(req.params.id, {
             $set: {
-                user: ""
+                user: req.body.user
             }
         },{
             new: true
@@ -141,11 +171,11 @@ export const getAllEvtolsController = async(req, res) => {
 
     try{
         res.json({
-            status: success,
+            status: "success",
             data: evtols
         })
     }catch(error){
-        res,json({
+        res.json({
             status: "error",
             message: error.message
         })
@@ -161,6 +191,24 @@ export const getEvtolBeingUsedByUser = async(req, res) => {
         res.json({
             status: "success",
             data: userEvtol
+        })
+    }catch(error){
+        res.json({
+            status: "error",
+            message: error.message
+        })
+    }
+}
+
+
+export const getAllAvailableEvtolsController = async(req, res) => {
+    try{
+        const evtols = await Evtol.find();
+        const availableEvtols = evtols.filter(e => e.state === "IDLE")
+
+        res.json({
+            status: "success",
+            data: availableEvtols
         })
     }catch(error){
         res.json({

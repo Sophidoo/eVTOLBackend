@@ -1,8 +1,8 @@
 import express from "express";
-import { clearUserFromEvtol, currentUserOfEvtol, evtolDeleteController, evtolEditController, evtolRegisterationController, getAllEvtolsController, getEvtolBeingUsedByUser } from "../controller/EvtolController.js";
+import { changeStateController, clearUserFromEvtol, currentUserOfEvtol, evtolDeleteController, evtolEditController, evtolRegisterationController, getAllAvailableEvtolsController, getAllEvtolsController, getEvtolBeingUsedByUser } from "../controller/EvtolController.js";
 import { isLogin } from "../middleware/isLogin.js";
 
-const evtolRoutes = express.Router();
+const evtolRoutes = express.Router()
 
 // register an evtol
 evtolRoutes.post("/register", evtolRegisterationController);
@@ -13,8 +13,11 @@ evtolRoutes.put("/user/:id", isLogin, currentUserOfEvtol)
 // edit an evtol
 evtolRoutes.put("/edit/:id", evtolEditController)
 
+// change state
+evtolRoutes.put("/changestate/:id", changeStateController)
+
 // delete an evtol
-evtolRoutes.delete("/delete/:serial", evtolDeleteController)
+evtolRoutes.delete("/delete/:serialno", evtolDeleteController)
 
 // clear current user from evtol
 evtolRoutes.put("/clearuser/:id", clearUserFromEvtol)
@@ -25,5 +28,7 @@ evtolRoutes.get("", getAllEvtolsController)
 // get evtol being used by user
 evtolRoutes.get("/evtolinuse", isLogin, getEvtolBeingUsedByUser)
 
+// get all available evtols
+evtolRoutes.get("/available", getAllAvailableEvtolsController)
 
 export default evtolRoutes

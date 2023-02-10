@@ -28,7 +28,8 @@ export const userRegisterationController = async(req, res) => {
 
         res.json({
             status: "success",
-            message: "Account Created Successfully"
+            data: user
+            // message: "Account Created Successfully"
         })
 
     }catch(error){
@@ -92,7 +93,7 @@ export const getSpecificUserController = async(req, res) => {
 
         res.json({
             status: "success",
-            data: {findUser}
+            data: findUser
         })
 
     }catch(error){
@@ -108,8 +109,10 @@ export const getSpecificUserController = async(req, res) => {
 export const updateUserController = async(req, res) => {
     const{firstname, lastname, email} = req.body;
 
+    const user = await EvtolUser.findById(req.userAuth)
+
     try{
-        await EvtolUser.updateOne(req.userAuth, {
+        await EvtolUser.updateOne(user, {
             $set: {
                 firstname: firstname,
                 lastname: lastname,
@@ -120,6 +123,8 @@ export const updateUserController = async(req, res) => {
         {
             new: true
         })
+
+        user.save()
 
         res.json({
             status: "success",
@@ -138,14 +143,24 @@ export const updateUserController = async(req, res) => {
 export const updatePasswordController = async(req, res) => {
     const {password} = req.body;
 
+    const user = await EvtolUser.findById(req.userAuth)
+
+    
+
+    const salt = await bcrypt.genSalt(5);
+    const hashedPassword = await bcrypt.hash(password, salt)
+
+
     try{
-        await EvtolUser.updateOne(req.userAuth, {
+        await EvtolUser.updateOne(user, {
             $set: {
-                password: password
+                password: hashedPassword
             }
         },{
             new: true
         })
+
+        user.save()
 
         res.json({
             status: "success",

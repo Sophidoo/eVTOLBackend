@@ -1,7 +1,7 @@
 import { getSpecificUserController, updatePasswordController, updateUserController, userLoginController, userRegisterationController } from "../controller/UserController.js"
 import { isLogin } from "../middleware/isLogin.js";
 import express from "express";
-import { adminLoginController, adminRegisteration, changeEmail, changePassword } from "../controller/AdminController.js";
+import { adminLoginController, adminRegisteration, changePassword } from "../controller/AdminController.js";
 
 const userRoutes = express.Router()
 
@@ -27,8 +27,6 @@ userRoutes.post("/admin", adminRegisteration);
 userRoutes.post("/adminlogin", adminLoginController);
 
 // change admin password
-userRoutes.put("/adminpassword", changePassword)
+userRoutes.put("/adminpassword/:username", changePassword)
 
-// change admin email
-userRoutes.put("/adminemail", changeEmail)
 export default userRoutes;
