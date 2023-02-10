@@ -24,6 +24,15 @@ app.use((req, res, next) => {
     next();
 });
 
+app.use(
+  cors({
+      credentials: true,
+      origin: true,
+      allowedHeaders: "*"
+  })
+)
+
+app.options('*', cors())
 app.use(express.json());
 
 app.use("/api/v1/users", userRoutes);
