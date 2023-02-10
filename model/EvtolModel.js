@@ -11,7 +11,7 @@ const evtolSchema = new mongoose.Schema({
         required: [true, "Please choose a model for the evtol"]
     },
     weight: {
-        type: mongoose.Types.Decimal128,
+        type: Number,
         required: [true, "Please enter the weight limit"]
     },
     batteryCapacity: {
