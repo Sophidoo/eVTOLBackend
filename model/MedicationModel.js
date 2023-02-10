@@ -13,7 +13,7 @@ const medicationSchema = new mongoose.Schema({
         type: String
     },
     weight: {
-        type: mongoose.Schema.Types.Decimal128,
+        type: Float32Array,
         required: [true, "please input the weight of the medicine"]
     },
     quantity: {
