@@ -3,7 +3,7 @@ import Evtol from "../model/EvtolModel.js";
 
 // Registering an Evtol
 export const evtolRegisterationController = async(req, res) => {
-    const{serialno, model, weight, batteryCapacity, state} = req.body;
+    const{serialno, model, weight, batteryCapacity} = req.body;
 
     const findEvtol = await Evtol.findOne({serialno})
 
@@ -19,7 +19,7 @@ export const evtolRegisterationController = async(req, res) => {
         model,
         weight,
         batteryCapacity,
-        state
+        state: batteryCapacity <= 25 ? "INACTIVE" : "IDLE"
     })
 
     res.json({

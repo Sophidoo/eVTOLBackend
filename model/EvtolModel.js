@@ -20,7 +20,7 @@ const evtolSchema = new mongoose.Schema({
     },
     state: {
         type: String,
-        enum: ["IDLE", "LOADING", "LOADED", "DELIVERING", "DELIVERED", "RETURNING"],
+        enum: ["IDLE", "LOADING", "LOADED", "DELIVERING", "DELIVERED", "RETURNING", "INACTIVE"],
         default: "IDLE"
     },
     user: {
