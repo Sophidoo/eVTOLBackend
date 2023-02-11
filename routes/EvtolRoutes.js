@@ -14,7 +14,7 @@ evtolRoutes.put("/user/:id", isLogin, currentUserOfEvtol)
 evtolRoutes.put("/edit/:id", evtolEditController)
 
 // get evtol b y serial
-evtolRoutes.put("/:serialno", getEvtolBySerial)
+evtolRoutes.post("/:serialno", getEvtolBySerial)
 
 // change state
 evtolRoutes.put("/changestate/:id", changeStateController)
