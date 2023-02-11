@@ -52,6 +52,31 @@ export const currentUserOfEvtol = async(req, res) => {
     }
 }
 
+// find etol by serial numberl
+export const getEvtolBySerial = async(req, res) => {
+    const{serialno} = req.params;
+    try{
+        const serial = await Evtol.findOne({serialno})
+
+        if(!serial){
+            return  res.json({
+                status: "error",
+                message: "Serial Nuber Incorrect"
+            })
+        }
+
+        res.json({
+            status: "success",
+            data: serial
+        })
+    }catch(error){
+        res.json({
+            status: "error",
+            message: error.message
+        })
+    }
+}
+
 
 // editing an evtol
 export const evtolEditController = async(req, res) => {

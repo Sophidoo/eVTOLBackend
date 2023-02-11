@@ -1,5 +1,5 @@
 import express from "express";
-import { changeStateController, clearUserFromEvtol, currentUserOfEvtol, evtolDeleteController, evtolEditController, evtolRegisterationController, getAllAvailableEvtolsController, getAllEvtolsController, getEvtolBeingUsedByUser } from "../controller/EvtolController.js";
+import { changeStateController, clearUserFromEvtol, currentUserOfEvtol, evtolDeleteController, evtolEditController, evtolRegisterationController, getAllAvailableEvtolsController, getAllEvtolsController, getEvtolBeingUsedByUser, getEvtolBySerial } from "../controller/EvtolController.js";
 import { isLogin } from "../middleware/isLogin.js";
 
 const evtolRoutes = express.Router()
@@ -12,6 +12,9 @@ evtolRoutes.put("/user/:id", isLogin, currentUserOfEvtol)
 
 // edit an evtol
 evtolRoutes.put("/edit/:id", evtolEditController)
+
+// get evtol b y serial
+evtolRoutes.put("/:serialno", getEvtolBySerial)
 
 // change state
 evtolRoutes.put("/changestate/:id", changeStateController)
