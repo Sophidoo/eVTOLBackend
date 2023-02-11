@@ -150,7 +150,7 @@ export const evtolDeleteController = async(req, res) => {
             })
         }
 
-        await Evtol.findOneAndDelete(req.params.serial)
+        await Evtol.deleteOne(evtol)
 
         res.json({
             status: "success",
