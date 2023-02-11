@@ -21,6 +21,7 @@ app.use((req, res, next) => {
       "Access-Control-Allow-Methods",
       "GET, POST, PUT, DELETE, PATCH, OPTIONS"
     );
+    res.setHeader("Access-Control-Allow-Credentials","true");
     next();
 });
 
@@ -42,5 +43,5 @@ app.use("/api/v1/medications", medicationRoutes);
 app.use("/api/v1/evtol", evtolRoutes)
 
 
-const PORT = process.env.PORT || 3000
+const PORT = process.env.PORT
 app.listen(PORT, console.log(`Server is running at ${PORT}`))
