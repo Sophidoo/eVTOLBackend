@@ -30,9 +30,10 @@ export const evtolRegisterationController = async(req, res) => {
 
 // update current user using evtol
 export const currentUserOfEvtol = async(req, res) => {
-
+    const {id} = req.params
+    const evtol = await Evtol.findById(id)
     try{
-        await Evtol.findByIdAndUpdate(req.params.id, {
+        const user = await Evtol.updateOne(evtol, {
             $set: {
                 user: req.userAuth
             }
@@ -40,9 +41,11 @@ export const currentUserOfEvtol = async(req, res) => {
             new: true
         })
 
+        evtol.save()
+
         res.json({
             status: "success",
-            message: "User added successfully"
+            message: user
         })
     }catch(error){
         res.json({
@@ -61,7 +64,7 @@ export const getEvtolBySerial = async(req, res) => {
         if(!serial){
             return  res.json({
                 status: "error",
-                message: "Serial Nuber Incorrect"
+                message: "Serial Number Incorrect"
             })
         }
 
