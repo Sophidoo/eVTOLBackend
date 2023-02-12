@@ -8,7 +8,7 @@ const evtolRoutes = express.Router()
 evtolRoutes.post("/register", evtolRegisterationController);
 
 // add user to evtol
-evtolRoutes.patch("/user/:id", isLogin, currentUserOfEvtol)
+evtolRoutes.put("/user/:id", isLogin, currentUserOfEvtol)
 
 // edit an evtol
 evtolRoutes.put("/edit/:id", evtolEditController)

@@ -30,12 +30,13 @@ export const evtolRegisterationController = async(req, res) => {
 
 // update current user using evtol
 export const currentUserOfEvtol = async(req, res) => {
-    const {id} = req.params
+    const {id} = req.params;
+    const{user} = req.body;
     const evtol = await Evtol.findById(id)
     try{
-        const user = await Evtol.updateOne(evtol, {
+        const euser = await Evtol.updateOne(evtol, {
             $set: {
-                user: req.userAuth
+                user: user
             }
         }, {
             new: true
@@ -45,7 +46,7 @@ export const currentUserOfEvtol = async(req, res) => {
 
         res.json({
             status: "success",
-            message: user
+            message: euser
         })
     }catch(error){
         res.json({
