@@ -20,7 +20,7 @@ medicationRoutes.delete("/delete/:id", deleteMedicationDetailsController);
 medicationRoutes.get("/getmedications/:id", isLogin, getMedicationsInEvtolController);
 
 // get all medications in evtol
-medicationRoutes.get("/findbyid",  findMedicationById);
+medicationRoutes.get("/findbyid/:id",  findMedicationById);
 
 // clear all medications in evtol
 medicationRoutes.delete("/deleteall/:id", isLogin, clearMedicationsController);
