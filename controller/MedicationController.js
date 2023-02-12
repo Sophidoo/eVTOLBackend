@@ -134,6 +134,27 @@ export const getMedicationsInEvtolController = async(req, res) => {
     }
 }
 
+// find medication by id
+export const findMedicationById = async(req, res) => {
+    const medId = req.params.id;
+
+    try{
+        const medications = await Medication.findById(medId);
+
+        res.json({
+            status: "success",
+            data: medications
+        })
+
+
+    }catch(error){
+        res.json({
+            status: "success",
+            message: error.message
+        })
+    }
+}
+
 export const clearMedicationsController = async(req, res) => {
     const evtolId = req.params.id;
 

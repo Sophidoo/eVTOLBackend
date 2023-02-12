@@ -46,7 +46,7 @@ export const currentUserOfEvtol = async(req, res) => {
 
         res.json({
             status: "success",
-            message: euser
+            message: evtol
         })
     }catch(error){
         res.json({

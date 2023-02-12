@@ -1,5 +1,5 @@
 import express from "express";
-import { addMedicationController, clearMedicationsController, deleteMedicationDetailsController, editMedicationDetailsController, getMedicationsInEvtolController } from "../controller/MedicationController.js";
+import { addMedicationController, clearMedicationsController, deleteMedicationDetailsController, editMedicationDetailsController, findMedicationById, getMedicationsInEvtolController } from "../controller/MedicationController.js";
 import { isLogin } from "../middleware/isLogin.js";
 import multer from "multer";
 import storage from "../config/cloudinary.js";
@@ -18,6 +18,9 @@ medicationRoutes.delete("/delete/:id", deleteMedicationDetailsController);
 
 // get all medications in evtol
 medicationRoutes.get("/getmedications/:id", isLogin, getMedicationsInEvtolController);
+
+// get all medications in evtol
+medicationRoutes.get("/findbyid",  findMedicationById);
 
 // clear all medications in evtol
 medicationRoutes.delete("/deleteall/:id", isLogin, clearMedicationsController);
