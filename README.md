@@ -3,10 +3,10 @@ This is a platform for evtol management built with Express JS and MongoDB.
 evtol is an electrical vertical takeoff an landing vehicle used as a means of transporting medications to areas with difficult access.
 
 # Project Support Features
-Users can can signup and login to their account
-Authenticated users can access available evtols as well send request for delivery using a particular evtol
-Admin can register evtol as well as edit and delete evtols.
-Admin login details `Username: soevtol, Password: 0000`
+* Users can can signup and login to their account
+* Authenticated users can access available evtols as well send request for delivery using a particular evtol
+* Admin can register evtol as well as edit and delete evtols.
+* Admin login details `Username: soevtol, Password: 0000`
 
 # .env
 .env file contains :
