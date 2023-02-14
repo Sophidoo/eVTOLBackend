@@ -16,7 +16,7 @@ export const evtolRegisterationController = async(req, res) => {
 
     await Evtol.create({
         serialno,
-        model,
+        model: weight <= 200 ? "Lightweight" : weight <= 300 ? "Middleweight" : weight <= 400 ? "Cruiserweight" : "Heavyweight",
         weight,
         batteryCapacity,
         state: batteryCapacity <= 25 ? "INACTIVE" : "IDLE"
