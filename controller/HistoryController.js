@@ -1,4 +1,4 @@
-import History from "../model/HistoryModel";
+import History from "../model/HistoryModel.js";
 
 // Register a user
 export const addToHistory = async(req, res) => {
