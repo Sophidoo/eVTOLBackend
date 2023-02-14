@@ -1,5 +1,6 @@
 import express from "express";
 import { changeStateController, clearUserFromEvtol, currentUserOfEvtol, evtolDeleteController, evtolEditController, evtolRegisterationController, getAllAvailableEvtolsController, getAllEvtolsController, getEvtolBeingUsedByUser, getEvtolBySerial } from "../controller/EvtolController.js";
+import { addToHistory, getAllHistory } from "../controller/HistoryController.js";
 import { isLogin } from "../middleware/isLogin.js";
 
 const evtolRoutes = express.Router()
@@ -33,5 +34,11 @@ evtolRoutes.get("/evtolinuse", isLogin, getEvtolBeingUsedByUser)
 
 // get all available evtols
 evtolRoutes.get("/available", getAllAvailableEvtolsController)
+
+// get all available evtols
+evtolRoutes.post("/history", addToHistory)
+
+// get all available evtols
+evtolRoutes.get("/gethistory", getAllHistory)
 
 export default evtolRoutes
