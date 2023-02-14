@@ -3,7 +3,7 @@ import Evtol from "../model/EvtolModel.js";
 
 // Registering an Evtol
 export const evtolRegisterationController = async(req, res) => {
-    const{serialno, model, weight, batteryCapacity} = req.body;
+    const{serialno, weight, batteryCapacity} = req.body;
 
     const findEvtol = await Evtol.findOne({serialno})
 
@@ -84,12 +84,12 @@ export const getEvtolBySerial = async(req, res) => {
 
 // editing an evtol
 export const evtolEditController = async(req, res) => {
-    const{model, weight, batteryCapacity, state} = req.body;
+    const{weight, batteryCapacity, state} = req.body;
 
     try{
         await Evtol.findByIdAndUpdate(req.params.id, {
             $set: {
-                model : model,
+                model : weight <= 200 ? "Lightweight" : weight <= 300 ? "Middleweight" : weight <= 400 ? "Cruiserweight" : "Heavyweight",
                 weight: weight,
                 batteryCapacity: batteryCapacity,
                 state: state
