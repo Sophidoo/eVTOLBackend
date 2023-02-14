@@ -22,7 +22,7 @@ export const addToHistory = async(req, res) => {
     }catch(error){
         res.json({
             status: "error",
-            message: error.message
+            message: "An error occured"
         })
     }
 }
