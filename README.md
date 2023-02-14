@@ -4,7 +4,7 @@ evtol is an electrical vertical takeoff an landing vehicle used as a means of tr
 
 # Project Support Features
 * Users can can signup and login to their account
-* Authenticated users can access available evtols as well send request for delivery using a particular evtol
+* Authenticated users can choose from available evtols and request delivery of medications through that evtol
 * Admin can register evtol as well as edit and delete evtols.
 * Admin login details `Username: soevtol, Password: 0000`
 
